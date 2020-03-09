@@ -1,0 +1,762 @@
+<!doctype html>
+<html><head>
+    <meta charset="UTF-8">
+    <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Use the latest (edge) version of IE rendering engine -->
+<title>Origin Insights Revamp</title>
+    <!-- The title tag shows in email notifications, like Android 4.4. -->
+    <!-- Please use an inliner tool to convert all CSS to inline as inpage or external CSS is removed by email clients -->
+    <!-- important in CSS is used to prevent the styles of currently inline CSS from overriding the ones mentioned in media queries when corresponding screen sizes are encountered -->
+
+    <!-- CSS Reset -->
+    <style type="text/css">
+		
+/* What it does: Remove spaces around the email design added by some email clients. */
+      /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+html,  body {
+	margin: 0 !important;
+	padding: 0 !important;
+	height: 100% !important;
+	width: 100% !important;
+}
+/* What it does: Stops email clients resizing small text. */
+		
+	{
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	}
+		
+/* What it does: Forces Outlook.com to display emails full width. */
+.ExternalClass {
+	width: 100%;
+}
+		
+/* What is does: Centers email on Android 4.4 */
+div[style*="margin: 16px 0"] {
+	margin: 0 !important;
+}
+		
+/* What it does: Stops Outlook from adding extra spacing to tables. */
+table,  td {
+	mso-table-lspace: 0pt !important;
+	mso-table-rspace: 0pt !important;
+}
+		
+/* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+table {
+	border-spacing: 0 !important;
+	border-collapse: collapse !important;
+	table-layout: fixed !important;
+	margin: 0 auto !important;
+}
+table table table {
+	table-layout: auto;
+}
+		
+/* What it does: Uses a better rendering method when resizing images in IE. */
+img {
+	-ms-interpolation-mode: bicubic;
+}
+		
+/* What it does: Overrides styles added when Yahoo's auto-senses a link. */
+.yshortcuts a {
+	border-bottom: none !important; 
+}
+		
+/* What it does: Another work-around for iOS meddling in triggered links. */
+a[x-apple-data-detectors] {
+	color: inherit !important;
+}
+    </style>
+
+<!-- Progressive Enhancements -->
+    <style type="text/css">
+        
+		p {
+			font-family: MarkWeb,Arial,Helvetica,sans-serif;
+			text-align: left;
+			color: #4f5b62;
+		}
+		
+/* What it does: Hover styles for buttons */
+        .button-td,
+        .button-a {
+            transition: all 80ms ease-in;
+        }
+		.roundimage{
+  		border-radius: 50%;
+		}
+		
+		.roundedtable-bot {
+		border-bottom-left-radius: 20px;
+		border-bottom-right-radius: 20px;
+		border-color: #F2F2F2F;
+  	 	border-collapse: separate;
+			
+		}
+		
+		.roundedtable-top {
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
+		border-color: #FFF;
+  	 	border-collapse: separate;
+    	border-spacing: 0px;
+		}
+		
+		.roundedtable {
+		border-radius: 20px;
+		border-color: #FFF;
+  	 	border-collapse: separate;
+    	border-spacing: 0px;
+		}
+		
+		.line-border {
+			border: 1px solid #000;
+			border-collapse: separate;
+			border-radius: 20px;
+		}
+		
+        .button-td:hover,
+        .button-a:hover {
+            background: #73C4CE !important;
+            border-color: #73C4CE !important;
+			opacity: 1;
+        }
+		
+		a:link { 
+  			color: #00BCD4;
+  			text-decoration: none;
+  			cursor: auto;
+			font-family: Arial;
+		}
+		
+		a:visited {
+			color: #40B1BF;
+  			text-decoration: none;
+  			cursor: auto;
+			font-family: Arial;
+		}
+		
+		.change-negative {
+		color: #CF4648
+		}
+		
+		.change-negative {
+		color: #CF4648
+		}
+		
+		h1 {
+    	color: #00BCD4;
+    	letter-spacing: 1px;
+    	margin: 20px 0;
+    	padding: 0px;
+		font-size: 18px;
+		font-family: Arial;
+		}
+/* What it does: Formats the headline treatments of H2s */
+		h2 {
+    	color: #4F5B62;
+    	letter-spacing: 1px;
+		display: inherit;
+    	padding: 0px;
+		font-size: 21px;
+		text-transform: uppercase;
+		
+		}
+/* What it does: Formats the headline treatments of H3s */
+		h3 {
+    	color: #00BCD4;
+    	letter-spacing: 1px;
+    	margin: 20px 0;
+    	padding: 0px;
+		font-size: 17px;
+		font-family: Arial;
+		}
+		
+		h4 {
+    	color: #4f5b62;
+    	letter-spacing: 1px;
+    	margin: 20px 0;
+    	padding: 0px;
+		font-size: 15px;
+		font-family: Arial;
+		}
+
+		.alignleft {
+    	float: left;
+		}
+
+		.alignright {
+		float: right;
+		}
+		
+/* What it does: Hover styles for moving blue buttons */
+		html, body {
+  		height: 100%;
+		}
+
+		.wrap {
+  		height: 100%;
+  		display: flex;
+ 		align-items: center;
+  		justify-content: center;
+}
+		
+		.wrap2 {
+  		height: 100%;
+  		display: inherit;
+  		align-items: flex-start;
+  		justify-content: flex-start;
+		}
+
+		.button {
+  		width: 140px;
+  		height: 45px;
+  		font-family: 'Arial', sans-serif;
+  		font-size: 14px;
+  		text-transform: none;
+  		letter-spacing: 1px;
+  		font-weight: 500;
+  		color: #FFF;
+  		background-color: #00BCD4;
+  		border: 2px solid #00BCD4;
+  		border-radius: 20px;
+  		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  		transition: all 0.3s ease 0s;
+  		cursor: pointer;
+  		outline: none;
+		margin-top: 10px;
+		margin-left: 0px;
+  		}					
+
+		.button:hover {
+ 		background-color: #00BCD4;
+  		box-shadow: 0px 15px 20px rgba(115, 196, 206, 0.5);
+  		color: #fff;
+  		transform: translateY(-2px);
+		}
+		
+		.change-negative {
+		color: #CF4648
+		}
+		.change-positive {
+		color: #00be0f
+		}
+		
+/* Gradient transparent - color - transparent */
+
+		hr.style-two {
+    	border: 0;
+    	height: 1px;
+		width: inherit;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(115, 196, 206, 0.5), rgba(0, 0, 0, 0));
+		}
+
+/* Media Queries */
+        @media screen and (max-width: 600px) {
+
+            .email-container {
+                width: 100% !important;
+            }
+
+            /* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
+            .fluid,
+            .fluid-centered {
+                max-width: 100% !important;
+                height: auto !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+            /* And center justify these ones. */
+            .fluid-centered {
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+
+            /* What it does: Forces table cells into full-width rows. */
+            .stack-column,
+            .stack-column-center {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                direction: ltr !important;
+            }
+            /* And center justify these ones. */
+            .stack-column-center {
+                text-align: center !important;
+            }
+        
+            /* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+            .center-on-narrow {
+                text-align: center !important;
+                display: block !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                float: none !important;
+            }
+            table.center-on-narrow {
+                display: inline-block !important;
+            }
+                
+        }
+
+    </style>
+    </head>
+    <body bgcolor="#F2F2F2" width="100%" style="margin: 0;" yahoo="yahoo">
+    <table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" style="border-collapse:collapse;">
+      <tr>
+        <td><center style="width: 100%;">
+            
+            <!-- Visually Hidden Preheader Text : BEGIN -->
+            <div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;"> (Optional) This text will appear in the inbox preview, but not the email body. </div>
+            <!-- Visually Hidden Preheader Text : END --> 
+            
+            <!-- Email Header : BEGIN -->
+			
+			<table align="center" width="600" class="email-container">
+            <tr>
+				<td><img src="OI Revamp Header.png" width="600" height="85" style="margin:0 auto; padding-bottom: 30px; border:none; display:block;" border="0" alt="OI Logo">
+				</td>
+              </tr>
+			</table>
+			
+            <!-- Email Header : END --> 
+            
+            <!-- Email Body : BEGIN -->
+	<table align="center" width="600" class="email-container">
+				
+      <tr>
+            <td class="roundedtable-top" style="padding: 20px 0; padding-bottom: 0px; padding-top: 40px; padding-bottom: 10px; background: #FFF; box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.1)"><img src="Files/OI Revamp Header-In_Line – OI.png" width="600" height="100" alt="alt_text" border="0"></td>
+            </tr>
+         	</table>
+			
+			
+			
+			<!-- Letter Intro BEGIN -->	
+			<table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#F2F2F2" width="600" class="email-container">
+			<tr>
+				
+            <td valign="middle" class="roundedtable-bot" style="text-align: center; padding: 40px; padding-top: 10px; padding-bottom: 10px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #4f5b62; background: #FFF; padding-left: 50px; padding-right: 40px; box-shadow: 0px 9px 15px rgba(0, 0, 0, 0.1)">	<hr class="style-two"><br><h2 style="padding-top: 10px;">From the Principals</h2><p>We're working on an exciting new format of Origin Insights that will feature more of the content you've told us you enjoy. Keep an eye out for the next newsletter in your inbox on 3/15. Future issues will be delivered on the 15th of every month going forward as well.<br><br>
+			<img src="Files/Principal-Sig_Blue.png" display="block;" width="300" height="50" alt="alt_text" border="0"></p>
+			</td>
+            </tr>	
+			<!-- Letter Intro END -->
+			<!-- SPACER -->
+				 <tr>
+                        <td valign="middle" style="text-align: center; padding-top: 5px; padding-bottom: 15px; font-family: sans-serif; font-size: 1px; mso-height-rule: exactly; color: #4f5b62; background: none;">&nbsp;</p>
+						</td>
+    </tr>
+			<!-- SPACER -->
+						<!-- TITLE HEADER -->	
+			<table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#F2F2F2" width="600" class="email-container">
+			<tr>
+				
+            <td valign="middle" class="roundedtable-top" style="text-align: center; padding: 40px; padding-top: 30px; padding-bottom: 20px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #4f5b62; background: #FFF; padding-left: 50px; box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.1)"> <h2>FEATURED CONTENT</h2>
+			</td>
+            </tr>	
+			<!-- TITLE HEADER -->
+			<!-- Three Even Columns : BEGIN -->
+   			<tr>
+                <td class="full-width-image"><img src="Files/600px-Article – Big.png" width="600" height="300" alt="alt_text" border="0" align="center" style="width: 100%; max-width: 600px;"></td>
+             </tr>
+			<tr>
+				
+            <td valign="middle" class="roundedtable-bot" style="text-align: center; padding: 40px; padding-top: 10px; padding-bottom: 10px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #4f5b62; background: #FFF; padding-left: 50px; padding-right: 40px; box-shadow: 0px 7px 15px rgba(0, 0, 0, 0.1)"><br><h2 style="padding-top: 10px; text-align: left; line-height: 25px; color:">The Potential Impact of Coronavirus on Private Real Estate Investments</h2>
+			  <h3 style="text-align: left">Michael Episcope</h3>
+				<h3 style="text-align: left; font-size: 15px; display:table-cell;"><em>15 minute read</em></h3>
+				<p>Over the past week, we’ve seen equity markets lose more than 10% of value, realizing the largest weekly point drop in U.S. history. Concerns over the COVID-19 Virus (Coronavirus) and its impact to global supply chains are real. The virus has now spread to every continent except Antarctica and, in today’s world, every country and product has ties to China. The virus’s inevitable spread has everyone panicked about what the ultimate impact will be, and these fears are showing up in the public markets.<br><div class="wrap2">
+  							<button class="button"><strong>Read Article</strong></button><br><br>
+							</div></p>
+			</td>
+            </tr>	
+            <!-- Three Even Columns : END -->
+		
+            <!-- Thumbnail Left, Text Right : END -->
+			<!-- SPACER -->
+				 <tr>
+                        <td valign="middle" style="text-align: center; padding-top: 5px; padding-bottom: 15px; font-family: sans-serif; font-size: 1px; mso-height-rule: exactly; color: #4f5b62; background: none;">&nbsp;</p>
+						</td>
+    </tr>
+			<!-- SPACER -->
+			<!-- WHAT WE'RE READING -->
+				    <tr>
+                        <td valign="middle" class="roundedtable-top" style="text-align: left; padding-left: 50px; padding-bottom: 20px; padding-top: 40px; padding-right: 50px; font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 20px; color: #4f5b62; background: #FFF; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1)"> <h2>WHAT WE'RE READING</h2><br>
+						  <h3 style="text-align: left; font-size: 20px;  line-height: 25px;">The Hottest Cities For Commercial Real Estate Investing In 2020</h3>
+				<h3 style="text-align: left; font-size: 15px; display:table-cell;"><em>9 minute read</em></h3></h3><p>Opportunities are abundant for commercial real estate investing in 2020. Most economists expect the U.S. economy to continue expanding, with volatility in global financial markets making the U.S. more attractive to international investors.<br></p><p style="color:#00BCD4; text-decoration: underline"><em><a href="https://www.forbes.com/sites/forbesrealestatecouncil/2020/02/13/the-hottest-cities-for-commercial-real-estate-investing-in-2020/#7b2e5a2ebe3b">Learn More</a></em></p>
+							<h3 style="text-align: left; font-size: 20px; line-height: 25px;">Investors Want to Place Capital Before the Next Recession</h3>
+				<h3 style="text-align: left; font-size: 15px; display:table-cell;"><em>7 minute read</em></h3></h3>
+				<p>Investors are anticipating the next downturn, but rather than taking their chips off the table, investors are looking to place capital this year before the next recession. According to an investor sentiment report from RCM LightBox, investors are looking to place capital in the first half of the year and before the November election.</p><p style="color:#00BCD4; text-decoration: underline"><a href="https://www.globest.com/2020/02/19/investors-want-to-place-capital-before-the-next-recession/"><em>Learn More</em></a></p>
+						</td>
+                      </tr>
+
+			<!-- WHAT WE'RE READING -->
+			<!-- ORIGIN IN THE NEWS -->
+				    <tr>
+                        <td valign="middle" class="roundedtable-bot" style="text-align: left; padding-left: 50px; padding-right: 50px;padding-bottom: 30px; padding-top: 10px;font-family: sans-serif; font-size: 16px; mso-height-rule: exactly; line-height: 20px; color: #4f5b62; background: #FFF; box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1)"> <h2>ORIGIN IN THE NEWS</h2><br>
+						<h3 style="text-align: left; font-size: 20px; line-height: 25px;">Rush to Place Capital Ahead of Election Expected</h3>
+				<h3 style="text-align: left; font-size: 15px; display:inline;"><em>5 minute read</em></h3>
+							<h3 style="text-align: left; font-size: 20px; line-height: 25px;">Union @ Roosevelt Sells to Chicago Investor for $27 Million</h3>
+				<h3 style="text-align: left; font-size: 15px; display:inline;"><em>6 minute read</em></h3>
+						</td>
+                      </tr>
+			<!-- WHAT WE'RE READING -->
+			<!-- SPACER -->
+			<tr>
+                        <td valign="middle" style="text-align: center; padding-top: 5px; padding-bottom: 15px; font-family: sans-serif; font-size: 1px; mso-height-rule: exactly; color: #4f5b62; background: none;">&nbsp;</p>
+						</td>
+   			</tr>
+			<!-- SPACER -->
+			<!-- TITLE HEADER -->	
+			<table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#F2F2F2" width="600" class="email-container">
+			<tr>
+				
+            <td valign="middle" class="roundedtable-top" style="text-align: center; padding-left: 50px; padding-right: 50px;padding-top: 30px; padding-bottom: 20px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #4f5b62; background: #FFF; box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.1)"> <h2>PROPERTY HIGHLIGHT</h2>
+			</td>
+            </tr>	
+			<!-- TITLE HEADER -->
+			<!-- Three Even Columns : BEGIN -->
+   			<tr>
+                <td class="full-width-image"><img src="Files/600px-Property – Big.png" width="600" alt="alt_text" border="0" align="center" style="width: 100%; max-width: 600px; height: auto;"></td>
+             </tr>
+			<tr>
+				
+            <td valign="middle" class="roundedtable-bot" style="text-align: center; padding: 40px; padding-top: 10px; padding-bottom: 10px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #4f5b62; background: #FFF; padding-left: 50px; padding-right: 50px; box-shadow: 0px 7px 15px rgba(0, 0, 0, 0.1)"><br><h2 style="padding-top: 10px;">Monroe Aberdeen Place</h2><h3 style="text-align: left">Chicago, IL</h3><p>A 120-unit, Class A boutique multifamily property built in 2018 and in the booming West Loop neighborhood of Chicago, located 1.5 miles west of downtown. The property provides easy access to numerous top-quality restaurants, grocery stores and multiple employers. It offers a more sophisticated and desired option for the neighborhood’s “renters-by choice” profile and features remarkable views of the city’s skyline.<br><div class="wrap2">
+  							<button class="button"><strong>Learn More</strong></button><br><br>
+							</div></p>
+			</td>
+            </tr>	
+            <!-- Three Even Columns : END -->
+			<!-- SPACER -->
+				 <tr>
+                        <td valign="middle" style="text-align: center; padding-top: 5px; padding-bottom: 15px; font-family: sans-serif; font-size: 1px; mso-height-rule: exactly; color: #4f5b62; background: none;">&nbsp;</p>
+						</td>
+    </tr>
+			<!-- SPACER -->
+			<!-- TITLE HEADER -->	
+	<table cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#F2F2F2" width="600" class="email-container">
+			<tr>
+				
+            <td valign="middle" class="roundedtable-top" style="text-align: center; padding-right: 50px; padding-top: 30px; padding-bottom: 20px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #4f5b62; background: #FFF; padding-left: 50px; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1)"> <h2>About Origin</h2>
+			</td>
+            </tr>	
+			<!-- TITLE HEADER -->
+			<!-- Employee Section Start -->
+			<!-- Thumbnail Left, Text Right : BEGIN -->
+        		<tr>
+                <td width="100%" align="center" valign="top" style="padding-left: 20px; padding-top: 10px; padding-right: 20px;padding-bottom: 0px; background: #FFF; box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1)" dir="ltr"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                    <td width="50%" class="stack-column-center"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                        <td dir="ltr" valign="top" style="padding-left: 30px;"><img src="Files/Headshot Test.png" width="125" alt="alt_text" border="0" class="center-on-narrow roundimage"></td>
+                      </tr>
+                      </table></td>
+						
+                    <td width="100%" class="stack-column-center"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                        <td dir="ltr" valign="top" style="font-family: Roboto; font-size: 14px; mso-height-rule: exactly; line-height: 20px; color: #555555; text-align: left; padding-right: 30px;" class="center-on-narrow"><h3>Welcome to the team, Marcus!</h3>
+                           <p>
+							Prior to joining Origin in Winter of 2020, Marcus worked as the Graphic Designer for Farmer’s Fridge, along with numerous other prominent Chicago startups, all focused in the food & beverage space.
+							</p>
+							</td>
+                      </tr>
+                      </table></td>
+                  </tr>
+                  </table>
+				</td>
+			  </tr>
+            <!-- Thumbnail Left, Text Right : END -->
+			<!-- Text Left : BEGIN -->
+		
+            <tr>
+				
+                <td width="100%" align="left" valign="top" class="roundedtable-bot" style="padding: 20px; padding-bottom: 15px; box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); background: #FFF;" dir="rtl"><table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+					<hr class="style-two">
+					<br>
+                    <tr>
+                    <td width="100%" class="stack-column-center">
+						<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                        <td dir="ltr" valign="top" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding: 10px; padding-left: 30px; padding-right: 30px; text-align: left;"><h2>Featured Job</h2><h3>Jr. Business Development Associate</h3>
+                            <p style="font-size: 14px;">At Origin we are always looking for top-quality talent to join our ever-expanding team. Currently we are hiring for a <em>Jr. Business Development Associate</em>. In this role, you would be joining our existing Business Development team and be responsible for growing the investor base across two open funds – Origin IncomePlus Fund and Origin Qualified Opportunity Zone Fund – and retaining the existing investor base by providing institutional-quality service.If you, or anyone you know, is interested, learn more about the role using the link below. </p>
+							<div class="wrap2">
+  							<button class="button"><strong>Learn More</strong></button><br><br>
+							</div>
+						  </td>
+                      </tr>
+						
+                      </table>
+					  </td>
+                  </tr>
+                  </table>
+				</td>
+              </tr>
+            <!-- Text Left : END -->
+			<!-- Employee Section END -->
+			<!-- SPACER -->
+			<tr>
+                        <td valign="middle" style="text-align: center; padding-top: 5px; padding-bottom: 15px; font-family: sans-serif; font-size: 1px; mso-height-rule: exactly; color: #4f5b62; background: none;">&nbsp;</p>
+						</td>
+            </tr>
+			<!-- SPACER -->
+			<!-- REIT : BEGIN -->
+				
+			  <tr>
+				  
+                <td class="roundedtable-top" style="padding: 20px; text-align: center; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; color: #555555;  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);background: #fff;">	<img src="Files/REIT_Report.png" display="block" width="255" height="50" alt="alt_text" border="0">
+					<hr class="style-two"><br>
+				<h2 style="padding-left: 30px; padding-top: 10px;">Base</h2>
+				<table style="width:100%">
+  				<tr>
+				<td align="center" valign="middle" width="15" style="padding-top:7px;padding-bottom:8px;text-align: center; line-height: 1em;">
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="pad0 mar0" style="line-height:10px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;"></p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">Total Return</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">Return (MTD)</p>
+				</td>
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">Return (YTD)</p>
+				</td>
+				</tr>
+				<tr>
+				<td align="center" valign="middle" width="15" style="padding-top:7px;padding-bottom:8px;text-align: center; line-height: 1em;">
+				<img src="Files/Safety.png" width="25" height="25" alt="Safety ICN">
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:10px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">Safety</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">5.41%</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-negative" style="line-height:22px;;color:#CF4648;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">- 0.02%</p>
+				</td>
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-negative" style="line-height:22px;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">- 0.70%</p>
+				</td>
+				</tr>
+					<tr>
+				<td align="center" valign="middle" width="25" style="padding-top:7px;padding-bottom:8px;text-align: center; line-height: 1em;">
+				<img src="Files/Income.png" width="25" alt="Income ICN">
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:10px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">Income</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">29.71%</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 0.84%</p>
+				</td>
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 2.03%</p>
+				</td>
+				</tr>
+					<tr>
+				<td align="center" valign="middle" width="25" style="padding-top:7px;padding-bottom:8px;text-align: center; line-height: 1em;">
+				<img src="Files/Growth.png" width="25" alt="">
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:10px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">Growth</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">28.21%</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 4.72%</p>
+				</td>
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 6.70%</p>
+				</td>
+				</tr>
+				</table>
+					
+			  <tr>
+                <td class="roundedtable-bot" style="padding: 20px; padding-top: 0px; text-align: center; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; color: #555555; background: #FFF; box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1)">
+				<h2 style="padding-left: 25px; padding-top: 10px;">Specialty</h2>
+				<table style="width:100%">
+  				<tr>
+				<td align="center" valign="middle" width="15" style="padding-top:7px;padding-bottom:8px;text-align: center; line-height: 1em;">
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="pad0 mar0" style="line-height:10px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;"></p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">Total Return</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">Return (MTD)</p>
+				</td>
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">Return (YTD)</p>
+				</td>
+				</tr>
+				<tr>
+				<td align="center" valign="middle" width="15" style="padding-top:7px;padding-bottom:8px;text-align: center; line-height: 1em;">
+				<img src="Files/Healthcare.png" width="30" alt="">
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:10px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">Healthcare</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">26.28%</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 3.31%</p>
+				</td>
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 6.91%</p>
+				</td>
+				</tr>
+					<tr>
+				<td align="center" valign="middle" width="25" style="padding-top:7px;padding-bottom:8px;text-align: center; line-height: 1em;">
+				<img src="Files/Tech.png" width="32" alt="">
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:10px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">Technology</p>
+				</td>
+					
+				<td align="center" class="padtb10 w30" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">47.05%</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 7.64%</p>
+				</td>
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 8.83%</p>
+				</td>
+				</tr>
+					<tr>
+				<td align="center" valign="middle" width="25" style="padding-top:7px;padding-bottom:8px;text-align: center; line-height: 1em;">
+				<img src="Files/High Yield.png" width="30" alt="">
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:10px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">High Yield</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">11.48%</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 1.46%</p>
+				</td>
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 0.94%</p>
+				</td>
+				</tr>
+				<tr>
+				<td align="center" valign="middle" width="25" style="padding-top:7px;padding-bottom:8px;text-align: center; line-height: 1em;">
+				<img src="Files/M-REIT.png" width="30" alt="">
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:10px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">M-REIT</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p style="line-height:22px;margin-top:0;margin-bottom:15px;padding:0;margin:0;font-weight: bold; vertical-align: middle; line-height: 1em; text-align: center;">25.88%</p>
+				</td>
+					
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 3.21%</p>
+				</td>
+				<td align="center" width="25" style="padding-top:10px;padding-bottom:10px">
+				<p class="change-positive" style="line-height:22px;;color:#00be0f;padding:0;margin:0;font-weight: bold; vertical-align: top; line-height: 1em; text-align: center;">+ 6.60%</p>
+				</td>
+				</tr>
+					
+				</table><br><br>
+			<!-- REIT : END -->
+  <!-- Email Footer : BEGIN -->
+</tr>
+           <table border="0" cellspacing="0" cellpadding="0" align="center" class="deviceWidth" style="width:410px;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;border-spacing:0;border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;"> 
+			<!-- SPACER -->
+			<tr>
+                        <td valign="middle" style="text-align: center; padding-top: 5px; padding-bottom: 15px; font-family: sans-serif; font-size: 1px; mso-height-rule: exactly; color: #4f5b62; background: none;">&nbsp;</p>
+						</td>
+            </tr>
+			<!-- SPACER -->
+			<!-- SPACER -->
+			<tr>
+                        <td valign="middle" style="text-align: center; padding-top: 5px; padding-bottom: 15px; font-family: sans-serif; font-size: 1px; mso-height-rule: exactly; color: #4f5b62; background: none;">&nbsp;</p>
+						</td>
+            </tr>
+			<!-- SPACER -->
+<tbody>
+	
+<tr> 
+<td align="center" valign="top" class="footerText" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;font-family:MarkWeb,Arial,Helvetica,sans-serif;font-size:12px;color:#f04f42;font-weight:bold;line-height:18px;mso-line-height-rule:exactly;text-align:center;vertical-align:top;"> <a style="text-decration:none;color:#555555;" href="https://goo.gl/maps/meSf5vU4H7U2">121 W WACKER, SUITE 1000 <br> CHICAGO, IL 60601</a> </td> 
+</tr> 
+<!--Extra Space--> 
+	
+<tr> 
+<td height="20" style="line-height:1px;font-size:1px;">&nbsp; </td> 
+</tr> 
+<!-- Start: Social Media icons --> 
+<tr> 
+<td class="line-height" valign="top" align="center" style="margin:0 auto;text-align:center;"> <a href="https://www.youtube.com/channel/UCdiMT79OST_AV7Q9mD_txEA" style="font-size:14px;color:#FFFFFF;font-family:MarkWeb,Arial,Helvetica,sans-serif;text-decoration:none;"><img src="http://learn.origininvestments.com/rs/717-ZIA-635/images/icon-youtube.png" alt="youtube" border="0" width="20"></a>&nbsp;&nbsp; <a href="https://www.linkedin.com/company/origininvestments" style="font-size:14px;color:#FFFFFF;font-family:MarkWeb,Arial,Helvetica,sans-serif;text-decoration:none;"><img src="http://learn.origininvestments.com/rs/717-ZIA-635/images/icon-linkedin.png" alt="linkedin" border="0" width="20"></a>&nbsp;&nbsp; <a href="https://twitter.com/OriginInvests" style="font-size:14px;color:#FFFFFF;font-family:MarkWeb,Arial,Helvetica,sans-serif;text-decoration:none;"><img src="http://learn.origininvestments.com/rs/717-ZIA-635/images/icon-twitter.png" alt="twitter" border="0" width="20"></a>&nbsp;&nbsp; <a href="https://www.facebook.com/origininvestments/" style="font-size:14px;color:#FFFFFF;font-family:MarkWeb,Arial,Helvetica,sans-serif;text-decoration:none;"><img src="http://learn.origininvestments.com/rs/717-ZIA-635/images/icon-facebook.png" alt="facebook" border="0" width="20"></a>&nbsp;&nbsp; <a href="https://www.instagram.com/origininvestments/" style="font-size:14px;color:#FFFFFF;font-family:MarkWeb,Arial,Helvetica,sans-serif;text-decoration:none;"><img src="http://learn.origininvestments.com/rs/717-ZIA-635/images/icon-instagram.png" alt="instagram" border="0" width="20"></a> </td> 
+</tr> 
+<tr> 
+<td align="center" valign="top" style="padding-top:25px;padding-bottom:25px;padding-right:0;padding-left:0;border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;"> 
+<!-- Start: Receiving preferences --> 
+<table border="0" cellspacing="0" cellpadding="0" align="center" class="deviceWidth" style="border-spacing:0;border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;"> 
+<tbody>
+<tr> 
+<td style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;"> 
+<table border="0" cellpadding="0" cellspacing="0" align="left" class="deviceWidth" style="border-spacing:0;border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;"> 
+<tbody>
+<tr> 
+<td align="center" class="footerText titlePaddingForMobile" style="padding-top:0;padding-bottom:0;padding-right:10px;padding-left:10px;border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;font-family:MarkWeb,Arial,Helvetica,sans-serif;font-size:12px;color:#f04f42;font-weight:bold;line-height:18px;mso-line-height-rule:exactly;text-align:center;vertical-align:top;"> <a href="https://learn.origininvestments.com/Origin-Insights-Unsubscribe.html" style="color:#555555;text-decoration:underline;">UNSUBSCRIBE</a> </td> 
+</tr> 
+</tbody>
+</table> 
+<!--[if (gte mso 9)|(IE)]></td><td valign="top" style="border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;" ><![endif]--> 
+<table border="0" cellpadding="0" cellspacing="0" align="left" class="deviceWidth" style="border-spacing:0;border-collapse:collapse;mso-table-lspace:0;mso-table-rspace:0;"> 
+<tbody>
+<tr> 
+</tr> 
+</tbody>
+</table> </td> 
+</tr> 
+</tbody>
+</table> 
+<!-- End: Receiving preferences --> </td> 
+</tr> 
+</tbody>
+</table> 
+      <!-- Email Footer : END -->
+            
+          </center></td>
+      </tr>
+    </table>
+</body>
+</html>
